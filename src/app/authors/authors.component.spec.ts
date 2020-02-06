@@ -66,8 +66,8 @@ describe('AuthorsComponent', () => {
     let authorElements = fixture.debugElement.queryAll(By.css('.author'));
     expect(authorElements.length).toBe(0);
 
-    spyOn(fixture.debugElement.injector.get(AuthorsService), 'all').and.returnValue(of(dca))
-    //fixture.detectChanges();
+    //spyOn(fixture.debugElement.injector.get(AuthorsService), 'all').and.returnValue(of(dca))
+    fixture.detectChanges();
 
     await new Promise((resolve, reject) => {
         setTimeout(() => resolve(), 1500);
