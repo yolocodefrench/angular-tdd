@@ -8,6 +8,7 @@ import Pretender from 'pretender';
 import { AuthorsComponent } from './authors.component';
 import { AuthorsService, Author } from './authors.service';
 import { DocumentCollection } from 'ngx-jsonapi';
+import { CommonModule } from '@angular/common';
 
 const server = new Pretender(function() {
   this.get('//jsonapiplayground.reyesoft.com/v2/authors', request => {
@@ -59,7 +60,7 @@ describe('AuthorsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('show all the authors', async () =>  {
+  it('show all the authors', async (done) =>  {
     let dca: DocumentCollection<Author> = null;
     const fixture = TestBed.createComponent(AuthorsComponent);
     const component = fixture.debugElement.componentInstance;
@@ -70,11 +71,18 @@ describe('AuthorsComponent', () => {
     fixture.detectChanges();
 
     await new Promise((resolve, reject) => {
-        setTimeout(() => resolve(), 1500);
+        const timer = setInterval(
+          () => {
+            if (component.authors.data.length > 0){
+              resolve()
+              clearInterval(timer)
+            }
+          }
+        , 5);
     })
     fixture.detectChanges();
-    
     authorElements = fixture.debugElement.queryAll(By.css('.author'));
     expect(authorElements.length).toBe(10);
+    done()
   });
 });
