@@ -13,7 +13,7 @@ import { BooksService } from './books/books.service';
 import { PhotosService } from './photos/photos.service';
 import { AuthorComponent } from './author/author.component';
 
-const routes: Routes = [
+export const routes: Routes = [
     { path: 'authors', component: AuthorsComponent },
     { path: 'authors/:id', component: AuthorComponent },
     { path: 'books', component: BooksComponent },

@@ -15,7 +15,7 @@ export class AuthorComponent implements OnInit {
 
   public author: Author;
   public books: DocumentCollection<Book>;
-  public idAuthor: Number
+  public idAuthor: string
   private routeSub: Subscription;
   
   constructor(
@@ -26,7 +26,7 @@ export class AuthorComponent implements OnInit {
    public getOneAuthor(): void{
     this.authorsService
       .get(
-        this.idAuthor.toString(),
+        this.idAuthor,
         {include:['books','photos']} 
       )
       .subscribe(author => {

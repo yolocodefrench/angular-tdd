@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed,fakeAsync } from '@angular/core/testing';
 import { NgxJsonapiModule } from 'ngx-jsonapi';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import Pretender from 'pretender';
 
-
 import { AuthorsComponent } from './authors.component';
 import { AuthorsService, Author } from './authors.service';
 import { DocumentCollection } from 'ngx-jsonapi';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 const server = new Pretender(function() {
   this.get('//jsonapiplayground.reyesoft.com/v2/authors', request => {
@@ -64,7 +64,7 @@ describe('AuthorsComponent', () => {
     let dca: DocumentCollection<Author> = null;
     const fixture = TestBed.createComponent(AuthorsComponent);
     const component = fixture.debugElement.componentInstance;
-    let authorElements = fixture.debugElement.queryAll(By.css('.author'));
+    let authorElements = fixture.debugElement.queryAll(By.css('.authors'));
     expect(authorElements.length).toBe(0);
 
     //spyOn(fixture.debugElement.injector.get(AuthorsService), 'all').and.returnValue(of(dca))
@@ -81,7 +81,7 @@ describe('AuthorsComponent', () => {
         , 5);
     })
     fixture.detectChanges();
-    authorElements = fixture.debugElement.queryAll(By.css('.author'));
+    authorElements = fixture.debugElement.queryAll(By.css('.authors'));
     expect(authorElements.length).toBe(10);
     done()
   });
