@@ -3,6 +3,8 @@ import { Document } from 'ngx-jsonapi/document';
 import { AuthorsService, Author } from '../authors/authors.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Book, BooksService } from '../books/books.service';
+import { DocumentCollection } from 'ngx-jsonapi';
 
 @Component({
   selector: 'app-author',
@@ -12,22 +14,26 @@ import { ActivatedRoute } from '@angular/router';
 export class AuthorComponent implements OnInit {
 
   public author: Author;
+  public books: DocumentCollection<Book>;
   public idAuthor: Number
   private routeSub: Subscription;
   
-  constructor(private authorsService: AuthorsService,private route: ActivatedRoute) {
+  constructor(
+    private authorsService: AuthorsService,
+    private route: ActivatedRoute) {
    }
    
    public getOneAuthor(): void{
     this.authorsService
       .get(
-        this.idAuthor.toString()
+        this.idAuthor.toString(),
+        {include:['books','photos']} 
       )
       .subscribe(author => {
         this.author = author
-        console.log(this.author)
+        console.log(author)
       },
-      error => console.error('Could not load authors :(', error));
+      error => console.error('Could not load author :(', error));
   }
 
   ngOnInit(){

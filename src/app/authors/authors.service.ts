@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Autoregister, Service, Resource, DocumentCollection, DocumentResource } from 'ngx-jsonapi';
-import { Book } from '../books/books.service'
-import { Photo } from '../photos/photos.service';
+import { Book, BooksService } from '../books/books.service'
+import { Photo, PhotosService } from '../photos/photos.service';
 
 export class Author extends Resource {
     public attributes = {
@@ -14,12 +14,18 @@ export class Author extends Resource {
     
     public relationships = {
         books: new DocumentCollection<Book>(),
-        photo: new DocumentResource<Photo>()
+        photos: new DocumentCollection<Photo>()
     };
 }
 
 @Injectable()
 export class AuthorsService extends Service<Author> {
+    constructor(){
+        super();
+        new BooksService();
+        new PhotosService();
+        this.register()
+    }
     public resource = Author;
     public type = 'authors';
 }

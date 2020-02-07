@@ -21,7 +21,6 @@ export class AuthorsComponent implements OnInit{
   public getData(): void{
     this.authorsService
       .all({
-        // include: ['books', 'photos'],
       })
       .subscribe(authors => {
         this.authors = authors

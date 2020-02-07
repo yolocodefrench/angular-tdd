@@ -1,3 +1,18 @@
 <div class="author">
+    <h2>Author</h2>
     <p>{{author.attributes.name}}</p>
+    <p>{{author.attributes.birthplace}}</p>
+    <p>{{author.attributes.date_of_birth}}</p>
+    <p>{{author.attributes.date_of_death}}</p>
+
+    <h2>Books</h2>
+    <div *ngFor="let book of author.relationships.books.data">
+        <p>{{book.attributes.title}}</p>
+        <p>{{book.attributes.date_published}}</p>
+    </div>
+    <h2>Photos</h2>
+    <div *ngFor="let photo of author.relationships.photos.data">
+        <p>{{photo.attributes.title}}</p>
+        <p>{{photo.attributes.uri}}</p>
+    </div>
 </div>

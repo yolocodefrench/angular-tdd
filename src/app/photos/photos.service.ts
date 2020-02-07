@@ -8,11 +8,17 @@ export class Photo extends Resource {
     public attributes = {
         id: ''
     };
+    public relationships = {
+        author: new DocumentCollection<Author>()
+    };
 }
 
 @Injectable()
-@Autoregister()
 export class PhotosService extends Service<Photo> {
+    constructor(){
+        super()
+        this.register()
+    }
     public resource = Photo;
     public type = 'photos';
 }
