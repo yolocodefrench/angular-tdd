@@ -11,9 +11,11 @@ import { PhotosComponent } from './photos/photos.component';
 import { AuthorsService } from './authors/authors.service';
 import { BooksService } from './books/books.service';
 import { PhotosService } from './photos/photos.service';
+import { AuthorComponent } from './author/author.component';
 
 const routes: Routes = [
     { path: 'authors', component: AuthorsComponent },
+    { path: 'author/:id', component: AuthorComponent },
     { path: 'books', component: BooksComponent },
     { path: 'photos', component: PhotosComponent },
 ];
@@ -23,6 +25,7 @@ const routes: Routes = [
     AuthorsComponent,
     BooksComponent,
     PhotosComponent,
+    AuthorComponent,
   ],
   imports: [
     BrowserModule,

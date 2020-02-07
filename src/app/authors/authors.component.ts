@@ -12,6 +12,7 @@ import { AuthorsService, Author } from './authors.service';
 export class AuthorsComponent implements OnInit{
 
   public authors: DocumentCollection<Author>;
+  public idAuthor: Number;
 
   public constructor(private authorsService: AuthorsService) {
     this.getData()

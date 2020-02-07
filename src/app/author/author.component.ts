@@ -1,0 +1,39 @@
+import { Component, OnInit } from '@angular/core';
+import { Document } from 'ngx-jsonapi/document';
+import { AuthorsService, Author } from '../authors/authors.service';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-author',
+  templateUrl: './author.component.html',
+  styleUrls: ['./author.component.sass']
+})
+export class AuthorComponent implements OnInit {
+
+  public author: Author;
+  public idAuthor: Number
+  private routeSub: Subscription;
+  
+  constructor(private authorsService: AuthorsService,private route: ActivatedRoute) {
+   }
+   
+   public getOneAuthor(): void{
+    this.authorsService
+      .get(
+        this.idAuthor.toString()
+      )
+      .subscribe(author => {
+        this.author = author
+        console.log(this.author)
+      },
+      error => console.error('Could not load authors :(', error));
+  }
+
+  ngOnInit(){
+    this.routeSub = this.route.params.subscribe(params => {
+      this.idAuthor=params['id']
+    });
+    this.getOneAuthor();
+  }
+}

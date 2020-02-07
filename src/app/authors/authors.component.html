@@ -1,2 +1,3 @@
-<p>authors works!</p>
-<div class="author" *ngFor="let author of authors.data">{{author.attributes.name}}</div>
+<div class="author" *ngFor="let author of authors.data">
+    <button [routerLink]="['/author', author.id]">{{author.attributes.name}}</button>
+</div>

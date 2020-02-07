@@ -11,11 +11,11 @@ export class Author extends Resource {
         date_of_birth: '',
         date_of_death: ''
     };
-    /*
+    
     public relationships = {
         books: new DocumentCollection<Book>(),
         photo: new DocumentResource<Photo>()
-    };*/
+    };
 }
 
 @Injectable()
